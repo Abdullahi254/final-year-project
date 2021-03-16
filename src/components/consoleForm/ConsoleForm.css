@@ -1,0 +1,17 @@
+.CustomButton{
+    background-color: #1b1b1b;
+    color: #fff;
+    padding: .3rem .7rem;
+    border-radius: 8px;
+}
+
+.CustomButton:hover{
+    background-color: #4d4d4d;
+}
+
+@media(max-width:768px){
+    .CustomButton{
+        padding: .4rem .5rem;
+        font-size: 14px;
+    }
+}

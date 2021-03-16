@@ -1,0 +1,45 @@
+.ConsoleDetails{
+    display: flex;
+    justify-content: flex-start;
+    margin: 1.5rem 0;
+}
+.InfoInput{
+    padding: 8px 20px;
+    margin: 8px 6px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #000;
+    font-style: italic;
+  }
+
+.Iconi{
+    background-color: #2d2d2d;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    width: 100px;
+ }
+
+ .Iconi:hover{
+    background-color: #ccc;
+    color: black;
+ }
+ 
+ .InfoInput:disabled{
+    background-color: #dddd;
+    border: .5px;
+ }
+@media(max-width:768px){
+    .InfoInput{
+        margin: 8px 3px;
+        max-width: 7.7rem;
+        font-size: 12px;
+    }
+    .Iconi{
+        margin: 0 .08rem;
+    }
+}

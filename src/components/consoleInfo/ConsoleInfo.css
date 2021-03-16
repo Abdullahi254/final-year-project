@@ -1,0 +1,42 @@
+.ConsoleInfo{
+    display: flex;
+    justify-content: flex-start;
+    margin: 4rem 0;
+}
+.InfoInput{
+    padding: 8px 20px;
+    margin: 8px 6px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  .Time{
+      padding: 8px ;
+  }
+
+  .Icons{
+    display: flex;
+    align-items: center;
+  }
+
+  .Icon{
+      margin: 0 .9rem;
+      cursor: pointer;
+  }
+
+@media(max-width:768px){
+    .InfoInput{
+        margin: 8px 3px;
+        max-width: 7.7rem;
+        font-size: 12px;
+    }
+    .Icon{
+        margin: 0 .08rem;
+    }
+}

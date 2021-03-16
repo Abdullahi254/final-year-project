@@ -1,0 +1,24 @@
+.Group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@media(max-width:992px){
+    .Group{
+        font-size: 12px;
+    }
+}
+
+@media(max-width:768px){
+    .Group{
+        font-size: 14px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .Logo{
+        width: 4rem;
+    }
+}
