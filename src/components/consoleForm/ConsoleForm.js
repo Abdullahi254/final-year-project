@@ -1,7 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, } from 'react'
 import { Form, Col } from 'react-bootstrap'
 import './ConsoleForm.css'
-function ConsoleForm() {
+import { projectFireStore } from '../../firebase'
+import { useAuth } from '../../contexts/AuthContext'
+function ConsoleForm(props) {
+    const { currentUser } = useAuth()
     const brandRef = useRef()
     const generationRef = useRef()
     const nameRef = useRef()
@@ -33,12 +36,47 @@ function ConsoleForm() {
                 </Form.Group>
             </Col>
         }
+        if (brand === "Arcade" || "Computer(PC)") {
+            return (
+                <Col>
+                    <Form.Control placeholder={brand} ref={generationRef} />
+                </Col>
+            )
+        }
+    }
+    async function saveConsoleHandler(e) {
+        e.preventDefault()
+        const consoleData = {
+            name: nameRef.current.value,
+            brand: brandRef.current.value,
+            generation: generationRef.current.value
+        }
+        try {
+            const data = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
+            if (!data.data()) {
+                const newdata = {
+                    myConsoles: [consoleData]
+                }
+                await projectFireStore.collection('consoles').doc(currentUser.uid).set(newdata)
+            }
+            else {
+                const myArray = data.data().myConsoles
+                myArray.push(consoleData)
+                const updatedObj = {
+                    myConsoles: [...myArray]
+                }
+                await projectFireStore.collection('consoles').doc(currentUser.uid).set(updatedObj)
+            }
+        } catch (er) {
+            console.log(er)
+        }
+
     }
     return (
-        <Form className="mt-3">
+        <Form className="mt-3" onSubmit={saveConsoleHandler}>
             <Form.Row>
                 <Col>
-                    <Form.Control placeholder="Console NickName" ref={nameRef}/>
+                    <Form.Control placeholder="Console NickName" ref={nameRef} />
                 </Col>
                 <Col>
                     <Form.Group controlId="exampleForm.ControlSelect1">
@@ -49,7 +87,7 @@ function ConsoleForm() {
                 </Col>
                 {generation()}
                 <Col>
-                    <button type="submit" className="CustomButton">Add Console</button>
+                    <button type="submit" className="CustomButton" onClick={props.clicked}>Add Console</button>
                 </Col>
             </Form.Row>
         </Form>

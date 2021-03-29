@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './ConsoleInfo.css'
 import {PlayCircleFilledWhite,PauseCircleFilled, Payment,Eject} from '@material-ui/icons'
-function ConsoleInfo() {
+function ConsoleInfo(props) {
     const [startHour, setStartHour] = useState(0)
     const [startMinute, setStartMinute] = useState(0)
     const [startSecond, setStartSecond] = useState(0)
@@ -52,7 +52,7 @@ function ConsoleInfo() {
 
     return (
         <div className="ConsoleInfo">
-            <input className="InfoInput" value="Console Name" disabled />
+            <input className="InfoInput" value={props.name} disabled />
             <input className="InfoInput" value={`${startHour}:${startMinute}:${startSecond}`} type="time" disabled />
             <input className="InfoInput Time" disabled value={`${0}:${minute}:${second}`} />
             <div className="Icons">

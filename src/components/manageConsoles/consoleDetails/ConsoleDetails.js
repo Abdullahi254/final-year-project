@@ -1,21 +1,19 @@
-import React, { useState, useRef } from 'react'
+import React, { useState} from 'react'
 import './ConsoleDetails.css'
 function ConsoleDetails(props) {
-    const nameRef = useRef()
     const [inputState, setInputState] = useState(true)
     function editInputsHandler() {
         setInputState(!inputState)
-        nameRef.current.focus()
     }
     return (
         <form className="ConsoleDetails" onSubmit={props.updateConsole}>
-            <input className="InfoInput" placeholder={props.name} value={props.newName} disabled={inputState} ref={nameRef} />
-            <input className="InfoInput" placeholder={props.brand} value={props.newBrand} disabled={inputState} />
-            <input className="InfoInput" disabled={inputState} value={props.newGeneration} placeholder={props.generation} />
+            <input className="InfoInput" placeholder={props.name} disabled={inputState} onChange={props.getName}/>
+            <input className="InfoInput" placeholder={props.brand} disabled={inputState} onChange={props.getBrand}/>
+            <input className="InfoInput" placeholder={props.generation} disabled={inputState} onChange={props.getGeneration}/>
             <div className="Icons">
                 {inputState?<button className="Iconi Edit" onClick={editInputsHandler}>Edit</button>:
-                            <button className="Iconi save" type="submit">Save</button>}
-                <button className="Iconi">Delete</button>
+                            <button className="Iconi save" type="submit" onClick ={editInputsHandler}>Save</button>}
+                <button className="Iconi" onClick={props.delete}>Delete</button>
             </div>
         </form>
     )
