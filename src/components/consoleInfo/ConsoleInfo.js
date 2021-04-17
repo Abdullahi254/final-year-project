@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './ConsoleInfo.css'
-import {PlayCircleFilledWhite,PauseCircleFilled, Payment,Eject} from '@material-ui/icons'
+import {PlayCircleFilledWhite,PauseCircleFilled, Payment,Eject,AddCircleOutline} from '@material-ui/icons'
 function ConsoleInfo(props) {
     const [startHour, setStartHour] = useState(0)
     const [startMinute, setStartMinute] = useState(0)
@@ -44,10 +44,17 @@ function ConsoleInfo(props) {
     }
     function stopClockHandler() {
         setStart(false)
-        console.log(start)
         setStartHour('')
         setStartMinute('')
         setStartSecond('')
+    }
+
+    function setActiveHandler(){
+        props.setActive(true)
+    }
+
+    function ejectHandler(){
+        props.setActive(false)
     }
 
     return (
@@ -56,9 +63,10 @@ function ConsoleInfo(props) {
             <input className="InfoInput" value={`${startHour}:${startMinute}:${startSecond}`} type="time" disabled />
             <input className="InfoInput Time" disabled value={`${0}:${minute}:${second}`} />
             <div className="Icons">
-                {start ? <span className="Icon"><PauseCircleFilled onClick={stopClockHandler} fontSize="large"/></span>: <span className="Icon"><PlayCircleFilledWhite onClick={setStartTimeHandler} fontSize="large" /></span>}
-                <span className="Icon"><Payment fontSize="large"/></span>
-                <span className="Icon"><Eject fontSize="large"/></span>
+                {start ? <span className="Icon"><PauseCircleFilled onClick={stopClockHandler} fontSize="large" style={{display:props.showIcons?'inline-block':'none'}}/></span>: <span className="Icon"><PlayCircleFilledWhite onClick={setStartTimeHandler} fontSize="large" style={{display:props.showIcons?'inline-block':'none'}}/></span>}
+                <span className="Icon" style={{display:props.showIcons?'inline-block':'none'}}><Payment fontSize="large"/></span>
+                <span className="Icon" style={{display:props.showIcons?'inline-block':'none'}} onClick={ejectHandler}><Eject fontSize="large"/></span>
+                <span className="Icon" onClick={setActiveHandler} style={{display:props.addIcon?'inline-block':'none'}}><AddCircleOutline fontSize="large"/></span>
             </div>
         </div>
     )

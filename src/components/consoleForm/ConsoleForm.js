@@ -49,13 +49,14 @@ function ConsoleForm(props) {
         const consoleData = {
             name: nameRef.current.value,
             brand: brandRef.current.value,
-            generation: generationRef.current.value
+            generation: generationRef.current.value,
+            active:false
         }
         try {
             const data = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
             if (!data.data()) {
                 const newdata = {
-                    myConsoles: [consoleData]
+                    myConsoles: [consoleData],
                 }
                 await projectFireStore.collection('consoles').doc(currentUser.uid).set(newdata)
             }
@@ -63,7 +64,7 @@ function ConsoleForm(props) {
                 const myArray = data.data().myConsoles
                 myArray.push(consoleData)
                 const updatedObj = {
-                    myConsoles: [...myArray]
+                    myConsoles: [...myArray],
                 }
                 await projectFireStore.collection('consoles').doc(currentUser.uid).set(updatedObj)
             }

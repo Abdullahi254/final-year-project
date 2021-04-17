@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import "./ActiveConsoles.css"
 import Navigation from '../navigation/Navigation'
 import { useAuth } from '../../contexts/AuthContext'
 import { Alert } from 'react-bootstrap'
@@ -8,17 +7,18 @@ import { Container } from 'react-bootstrap'
 import ConsoleInfo from '../consoleInfo/ConsoleInfo'
 import { projectFireStore } from '../../firebase'
 
-function ActiveConsoles() {
+function IdleConsoles() {
     const { logout, currentUser } = useAuth()
     const [error, setError] = useState('')
     const [consoles, setConsoles] = useState([])
     const history = useHistory()
-    useEffect(() => {  
+    useEffect(() => {
         async function getConsoles() {
-            try { 
+            try {
+                console.log('rerender')
                 const data = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
-                const activeConsoles = await data.data().myConsoles
-                setConsoles(activeConsoles)
+                const idleConsoles = data.data().myConsoles
+                setConsoles(idleConsoles)
             } catch (er) {
                 console.log(er)
             }
@@ -39,7 +39,7 @@ function ActiveConsoles() {
 
     async function statusHandler(status,index){
         try{
-   
+            console.log(status,index)
             const data = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
             const consoleArray = data.data().myConsoles
             consoleArray[index].active = status
@@ -60,7 +60,7 @@ function ActiveConsoles() {
                 {
                     consoles.map((obj, index) => {
                         return (
-                            obj.active ?<ConsoleInfo name={obj.name} key={index} showIcons setActive={(status)=>statusHandler(status,index)}/>:null
+                            !obj.active?<ConsoleInfo name={obj.name} key={index} setActive={(status)=>statusHandler(status,index)} addIcon/>:null
                         )
                     })
                 }
@@ -69,4 +69,4 @@ function ActiveConsoles() {
     )
 }
 
-export default ActiveConsoles
+export default IdleConsoles

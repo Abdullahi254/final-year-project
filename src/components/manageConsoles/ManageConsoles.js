@@ -17,7 +17,6 @@ function ManageConsoles() {
         //fetch name, brand and generation from database
         async function getData(){
             try{
-                console.log(currentUser)
                 const doc = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
                 setDummyInfo(doc.data().myConsoles)
             }catch(er){
@@ -86,7 +85,7 @@ function ManageConsoles() {
         },3000)
     }
     async function deleteConsoleHandler(e,index){
-        //delete console
+        //delete element from array in firestore
         e.preventDefault();
         const consoleObj = dummyInfo[index]
         console.log(dummyInfo[index])  
