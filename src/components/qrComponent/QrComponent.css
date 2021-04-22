@@ -1,0 +1,29 @@
+.Qr{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    margin-left: -350px;
+    left:50%;
+    top: 13rem;
+    height: 700px;
+    width: 700px;
+    background-color: rgb(255, 255, 255);
+    padding: 32px 16px;
+    box-sizing: border-box;
+    z-index: 300;
+}
+
+.CloseIcon{
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+@media(max-width:768px){
+    .Qr{
+        height: 450px;
+        width: 450px;
+        margin-left: -225px;
+    }
+}

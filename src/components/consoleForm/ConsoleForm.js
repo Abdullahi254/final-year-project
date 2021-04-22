@@ -8,6 +8,7 @@ function ConsoleForm(props) {
     const brandRef = useRef()
     const generationRef = useRef()
     const nameRef = useRef()
+    const priceRef = useRef()
     const [brand, setBrand] = useState('PlayStation')
     function selectBrandHandler(e) {
         setBrand(e.target.value)
@@ -50,6 +51,7 @@ function ConsoleForm(props) {
             name: nameRef.current.value,
             brand: brandRef.current.value,
             generation: generationRef.current.value,
+            price:priceRef.current.value,
             active:false
         }
         try {
@@ -87,6 +89,9 @@ function ConsoleForm(props) {
                     </Form.Group>
                 </Col>
                 {generation()}
+                <Col>
+                    <Form.Control placeholder="price/min" ref={priceRef} />
+                </Col>
                 <Col>
                     <button type="submit" className="CustomButton" onClick={props.clicked}>Add Console</button>
                 </Col>

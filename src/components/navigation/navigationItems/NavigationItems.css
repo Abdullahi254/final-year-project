@@ -24,3 +24,9 @@
         width: 4rem;
     }
 }
+
+@media(max-width:255px){
+    .Group{
+        font-size: 12px;
+    }
+}

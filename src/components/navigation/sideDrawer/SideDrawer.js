@@ -9,6 +9,7 @@ function SideDrawer(props) {
         <>
             <BackDrop show={props.show} clicked={props.close}/>
             <div className={attachedClasses}>
+                <div className="Inside">
                 <nav>
                     <NavigationItems />
                 </nav>
@@ -16,6 +17,7 @@ function SideDrawer(props) {
                     <NavigationItem path="/settings">Settings</NavigationItem>
                     <NavigationItem path="/logout" clicked={props.onLogout}>Log Out</NavigationItem>
                 </ul>
+                </div>
             </div>
         </>
     )
