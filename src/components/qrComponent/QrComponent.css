@@ -19,11 +19,41 @@
     top: 0;
     cursor: pointer;
 }
-
+.QRImg{
+    display: block;
+    width: 500px;
+    margin: auto;
+}
+.Message{
+    display: block;
+    text-align: center;
+}
+.Print{
+    margin: auto;
+    padding: .3rem 2rem;
+    border-radius: 1rem;
+}
+.Print:hover{
+    background-color: #2d2d2d;
+    color: white;
+}
 @media(max-width:768px){
     .Qr{
-        height: 450px;
-        width: 450px;
+        height: 500px;
+        width: 500px;
         margin-left: -225px;
     }
+    .QRImg{
+        width: 350px;
+    }
 }
+
+@media print {
+    .Message{
+        font-family:georgia, times, serif;
+        font-size: 45px;
+    }
+    .QRImg{
+        width: 500px;
+    }
+ }

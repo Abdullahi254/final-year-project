@@ -3,6 +3,7 @@ import Login from './login/Login'
 import ActiveConsoles from './activeConsoles/ActiveConsoles'
 import ManageConsoles from './manageConsoles/ManageConsoles'
 import IdleConsoles from './idleConsoles/IdleConsoles'
+import Scanner from './Scanner/Scanner'
 import { AuthProvider } from '../contexts/AuthContext'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import PrivateRoute from './privateRoute/PrivateRoute'
@@ -24,6 +25,7 @@ function App() {
           <Switch>
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
+            <Route path="/scanner" component={Scanner}/>
             <PrivateRoute path="/settings" component={ManageConsoles} />
             <PrivateRoute path="/idleconsoles" component={IdleConsoles} />
             <PrivateRoute path="/" component={ActiveConsoles} />

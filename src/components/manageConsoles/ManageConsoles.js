@@ -30,6 +30,7 @@ function ManageConsoles() {
     const [name,setName] = useState([])
     const [brand,setBrand] = useState([])
     const [generation,setGeneration] = useState([])
+    const [price,setPrice]= useState([])
     const history = useHistory()
     async function handleLogout() {
         try {
@@ -50,7 +51,8 @@ function ManageConsoles() {
             prevInfo.splice(index,1,{
                 name:name[index],
                 brand:brand[index],
-                generation:generation[index]
+                generation:generation[index],
+                price:price[index]
             })
             return [...prevInfo]
         })
@@ -77,6 +79,12 @@ function ManageConsoles() {
         setGeneration(prev=>{
             prev.splice(index,1,e.target.value)
             return [...prev]
+        })
+    }
+    function updatePrice(e,index){
+        setPrice(prev=>{
+            prev.splice(index,1,e.target.value)
+            return[...prev]
         })
     }
     function newConsoleHandler(){
@@ -108,7 +116,7 @@ function ManageConsoles() {
                 {
                     dummyInfo.map((val,index)=>{
                         return (
-                            <ConsoleDetails name={val.name} brand={val.brand} generation={val.generation} updateConsole={(e)=>updateConsole(e,index)} getName={(e)=>updateName(e,index)} getBrand={(e)=>updateBrand(e,index)} getGeneration={(e)=>updateGeneration(e,index)} key={index} delete={(e)=>deleteConsoleHandler(e,index)}/>
+                            <ConsoleDetails name={val.name} brand={val.brand} generation={val.generation} price={val.price} updateConsole={(e)=>updateConsole(e,index)} getName={(e)=>updateName(e,index)} getBrand={(e)=>updateBrand(e,index)} getGeneration={(e)=>updateGeneration(e,index)} getPrice={(e)=>updatePrice(e,index)} key={index} delete={(e)=>deleteConsoleHandler(e,index)}/>
                         )
                     })
                 } 
