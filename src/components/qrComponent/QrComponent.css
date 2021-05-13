@@ -2,10 +2,10 @@
     position: fixed;
     display: flex;
     flex-direction: column;
-    margin-left: -350px;
+    margin-left: -25%;
     left:50%;
-    top: 5rem;
-    height: 33rem;
+    top: 18%;
+    height: 32rem;
     width: 40rem;
     background-color: rgb(255, 255, 255);
     padding: 32px 16px;
