@@ -1,0 +1,14 @@
+.Payment{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle, black, white);
+    font-family: 'Roboto', sans-serif;
+}
+.Card{
+    margin-top: 20rem;
+    max-width: 34rem;
+    margin: auto;
+    justify-content: center;
+}

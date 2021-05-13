@@ -3,9 +3,9 @@ import './ConsoleInfo.css'
 import {PlayCircleFilledWhite,PauseCircleFilled, Payment,Eject,AddCircleOutline,CropFree} 
 from '@material-ui/icons'
 function ConsoleInfo(props) {
-    const [startHour, setStartHour] = useState(0)
-    const [startMinute, setStartMinute] = useState(0)
-    const [startSecond, setStartSecond] = useState(0)
+    const [startHour, setStartHour] = useState(new Date().getHours())
+    const [startMinute, setStartMinute] = useState(new Date().getMinutes())
+    const [startSecond, setStartSecond] = useState(new Date().getSeconds())
     const [second, setSecond] = useState(0)
     const [minute, setMinute] = useState(0)
     const [start, setStart] = useState(false)
@@ -63,17 +63,23 @@ function ConsoleInfo(props) {
     function qrCodeHandler(){
         props.qrCodeHandler(startHour,startMinute,startSecond)
     }
+
+    function paymentHandler(){
+        props.pay(startHour,startMinute)
+    }
+
     return (
         <div className="ConsoleInfo">
             <div className="Icons">
                 <span className="Icon" style={{display:start?'inline-block':'none'}} onClick={qrCodeHandler}><CropFree /></span>
             </div>
             <input className="InfoInput" value={props.name} disabled />
-            <input className="InfoInput" value={`${startHour}:${startMinute}:${startSecond}`} type="time" disabled />
+            <input className="InfoInput" value={`${startHour}:${startMinute}:${startSecond}`} type="time" disabled/>
             <input className="InfoInput Time" disabled value={`${0}:${minute}:${second}`} />
             <div className="Icons">
                 {start ? <span className="Icon"><PauseCircleFilled onClick={stopClockHandler}  style={{display:props.showIcons?'inline-block':'none'}}/></span>: <span className="Icon"><PlayCircleFilledWhite onClick={setStartTimeHandler}  style={{display:props.showIcons?'inline-block':'none'}}/></span>}
-                <span className="Icon" style={{display:props.showIcons?'inline-block':'none'}}><Payment/></span>
+                <button className="Pay" style={{display:props.showIcons?'inline-block':'none'}} onClick={paymentHandler} ><Payment/></button>
+                {/* disabled={(new Date().getMinutes()-startMinute)>5||(new Date().getHours()-startHour)>1?false:true} */}
                 <span className="Icon" style={{display:props.showIcons?'inline-block':'none'}} onClick={ejectHandler}><Eject /></span>
                 <span className="Icon" onClick={setActiveHandler} style={{display:props.addIcon?'inline-block':'none'}}><AddCircleOutline /></span>
             </div>

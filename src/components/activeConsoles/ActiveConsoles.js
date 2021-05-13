@@ -64,7 +64,14 @@ function ActiveConsoles() {
         setStartSecond(s)
         setQrConsole(consoles[index])
     }
-
+    function paymmentHandler(h,m,index){
+        const day = new Date()
+        const hoursPlayed = day.getHours() - h
+        const minutesPlayed = day.getMinutes() - m
+        const totalMinutesPlayed = (hoursPlayed * 60) + minutesPlayed
+        console.log('total minutes played '+totalMinutesPlayed)
+        history.push(`/payment/console/${index}/${totalMinutesPlayed}/${consoles[index].price}`)
+    }
     function closeQrComponentHandler(){
         showQrComponent(false)
     }
@@ -82,7 +89,7 @@ function ActiveConsoles() {
                     consoles.map((obj, index) => {
                         return (
                             obj.active ?<ConsoleInfo name={obj.name} key={index} showIcons setActive={(status)=>statusHandler(status,index)}
-                            qrCodeHandler={(h,m,s)=>qrCodeHandler(h,m,s,index)}/>:null
+                            qrCodeHandler={(h,m,s)=>qrCodeHandler(h,m,s,index)} pay={(h,m)=>paymmentHandler(h,m,index)}/>:null
                         )
                     })
                 }

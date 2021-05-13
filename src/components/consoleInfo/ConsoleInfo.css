@@ -29,6 +29,16 @@
       margin: 0 .9rem;
       cursor: pointer;
   }
+.Pay{
+    margin: 0 .9rem;
+    border: none;
+    background-color: #fff;
+    padding: 0;
+}
+
+.Pay:disabled{
+    cursor: not-allowed;
+}
 
 @media(max-width:768px){
     .InfoInput{

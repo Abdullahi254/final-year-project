@@ -4,9 +4,9 @@
     flex-direction: column;
     margin-left: -350px;
     left:50%;
-    top: 13rem;
-    height: 700px;
-    width: 700px;
+    top: 5rem;
+    height: 33rem;
+    width: 40rem;
     background-color: rgb(255, 255, 255);
     padding: 32px 16px;
     box-sizing: border-box;
@@ -21,7 +21,7 @@
 }
 .QRImg{
     display: block;
-    width: 500px;
+    width: 25rem;
     margin: auto;
 }
 .Message{
@@ -39,12 +39,12 @@
 }
 @media(max-width:768px){
     .Qr{
-        height: 500px;
-        width: 500px;
-        margin-left: -225px;
+        height: 30rem;
+        width: 30rem;
+        margin-left: -15rem;
     }
     .QRImg{
-        width: 350px;
+        width: 20rem;
     }
 }
 
