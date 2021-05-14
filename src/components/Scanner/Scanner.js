@@ -13,7 +13,7 @@ function Scanner() {
     const [accessToken, setAccessToken] = useState('')
     const [error, setError] = useState('')
     useEffect(() => {
-        const tokenUrl = '/oauth/v1/generate?grant_type=client_credentials'
+        const tokenUrl = "/oauth/v1/generate?grant_type=client_credentials"
         const auth = "Basic " + new Buffer(process.env.REACT_APP_SAFARICOM_CONSUMER_KEY + ':' + process.env.REACT_APP_SAFARICOM_CONSUMER_SECRET).toString("base64")
         axios({
             method: 'get',
