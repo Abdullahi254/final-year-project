@@ -47,6 +47,7 @@ function Scanner() {
             fullTimeString += fullTimeList[i];
         }
         const timeStamp = dateString+fullTimeString
+        console.log(timeStamp)
         const password = new Buffer(shortCode + passKey+timeStamp).toString("base64")
         const price = amount.toString()
         const phone = phoneRef.current.value.toString()
@@ -66,7 +67,7 @@ function Scanner() {
                 "PartyA": phone,
                 "PartyB": shortCode,
                 "PhoneNumber": phone,
-                "CallBackURL": "https://1a35a85767da.ngrok.io/lipanampesa",
+                "CallBackURL": "https://d71aa1336d8c.ngrok.io/lipanampesa",
                 "AccountReference": "Gamer001",
                 "TransactionDesc": "GAMING SERVICE"
             }
