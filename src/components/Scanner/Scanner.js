@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './Scanner.css'
+import Socket from '../socket/Socket'
 import { useParams } from 'react-router-dom'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import axios from 'axios'
-import io from 'socket.io-client'
-const socket = io("http://localhost:4000");
+
 function Scanner() {
     const { time, price } = useParams()
     const [amount] = useState(price)
@@ -67,7 +67,7 @@ function Scanner() {
                 "PartyA": phone,
                 "PartyB": shortCode,
                 "PhoneNumber": phone,
-                "CallBackURL": "https://d71aa1336d8c.ngrok.io/lipanampesa",
+                "CallBackURL": "https://ad6f813e57e2.ngrok.io/lipanampesa",
                 "AccountReference": "Gamer001",
                 "TransactionDesc": "GAMING SERVICE"
             }
@@ -78,14 +78,13 @@ function Scanner() {
             setError('something went wrong (SPT error)')
         })
     }
-    socket.on('metaData',(data)=>{
-        console.log(data)
-    })
+    
     return (
         <div className="Payment">
             <Card className="Card">
                 <Card.Body>
                     {error?<Alert className="text-center" variant="danger">{error}</Alert>:null}
+                   <Socket loading={(i)=>setLoading(i)}/>
                     <h2 className="mb-4 text-center">That will be KSH.{time * price}.</h2>
                     <Card.Text className="mb-4 Text">Kindly insert your <b>safaricom</b> number to get a payment prompt.</Card.Text>
                     <Form onSubmit={handleSubmit}>
