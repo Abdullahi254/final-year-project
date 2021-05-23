@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import './Scanner.css'
+import './Payment.css'
 import Socket from '../socket/Socket'
 import { useParams } from 'react-router-dom'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
@@ -67,7 +67,7 @@ function Scanner() {
                 "PartyA": phone,
                 "PartyB": shortCode,
                 "PhoneNumber": phone,
-                "CallBackURL": "https://ad6f813e57e2.ngrok.io/lipanampesa",
+                "CallBackURL": "https://da430c4ed827.ngrok.io/lipanampesa",
                 "AccountReference": "Gamer001",
                 "TransactionDesc": "GAMING SERVICE"
             }

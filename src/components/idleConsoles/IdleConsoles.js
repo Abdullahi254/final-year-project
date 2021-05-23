@@ -15,7 +15,6 @@ function IdleConsoles() {
     useEffect(() => {
         async function getConsoles() {
             try {
-                console.log('rerender')
                 const data = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
                 const idleConsoles = data.data().myConsoles
                 setConsoles(idleConsoles)

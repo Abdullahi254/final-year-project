@@ -3,9 +3,9 @@ import './ConsoleInfo.css'
 import {PlayCircleFilledWhite,PauseCircleFilled, Payment,Eject,AddCircleOutline,CropFree} 
 from '@material-ui/icons'
 function ConsoleInfo(props) {
-    const [startHour, setStartHour] = useState(new Date().getHours())
-    const [startMinute, setStartMinute] = useState(new Date().getMinutes())
-    const [startSecond, setStartSecond] = useState(new Date().getSeconds())
+    const [startHour, setStartHour] = useState('')
+    const [startMinute, setStartMinute] = useState('')
+    const [startSecond, setStartSecond] = useState('')
     const [second, setSecond] = useState(0)
     const [minute, setMinute] = useState(0)
     const [start, setStart] = useState(false)
@@ -20,7 +20,9 @@ function ConsoleInfo(props) {
                     setSecond(second => second += 1)
                 }
             }, 1000)
-            return () => clearInterval(id)
+            return () =>{
+                clearInterval(id)
+            } 
         }
     }, [start, second])
 
