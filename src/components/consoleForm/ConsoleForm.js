@@ -46,6 +46,7 @@ function ConsoleForm(props) {
         }
     }
     async function saveConsoleHandler(e) {
+        //saving console information to database as an array
         e.preventDefault()
         const consoleData = {
             name: nameRef.current.value,
@@ -58,6 +59,7 @@ function ConsoleForm(props) {
             const data = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
             if (!data.data()) {
                 const newdata = {
+                    ...data.data(),
                     myConsoles: [consoleData],
                 }
                 await projectFireStore.collection('consoles').doc(currentUser.uid).set(newdata)
@@ -66,6 +68,7 @@ function ConsoleForm(props) {
                 const myArray = data.data().myConsoles
                 myArray.push(consoleData)
                 const updatedObj = {
+                    ...data.data(),
                     myConsoles: [...myArray],
                 }
                 await projectFireStore.collection('consoles').doc(currentUser.uid).set(updatedObj)

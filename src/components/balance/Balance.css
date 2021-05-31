@@ -1,0 +1,23 @@
+.Balance{
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.Blogo{
+    padding:1rem 0;
+    width: 5rem;
+    height: 6rem;
+    display: block;
+    margin: auto;
+}
+
+.Details{
+    max-width: 40rem;
+    margin: auto;
+    box-shadow: -3px 3px 20px gray;
+}
+
+.Amount{
+    font-size: 20px;
+    font-weight: 330;
+}

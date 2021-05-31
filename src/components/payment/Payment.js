@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import axios from 'axios'
 
+
 function Scanner() {
     const { time, price } = useParams()
     const [amount] = useState(price)
@@ -67,7 +68,7 @@ function Scanner() {
                 "PartyA": phone,
                 "PartyB": shortCode,
                 "PhoneNumber": phone,
-                "CallBackURL": "https://da430c4ed827.ngrok.io/lipanampesa",
+                "CallBackURL": "https://3059ab347bbf.ngrok.io/lipanampesa",
                 "AccountReference": "Gamer001",
                 "TransactionDesc": "GAMING SERVICE"
             }
