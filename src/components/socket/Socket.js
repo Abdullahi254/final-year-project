@@ -20,7 +20,7 @@ function Socket(props) {
                 setShow(true)
                 setStatus('success')
                 setMessage("Payment Was a Success.")
-                // depositHandler()
+                depositHandler(data.CallbackMetadata.Item)
             }
             else {
                 setShow(true)
@@ -32,25 +32,27 @@ function Socket(props) {
         return ()=>socket.off('metaData')
     })   
     
-    async function depositHandler(amount){
+    async function depositHandler(items){
         //saving created statement to database and updating balance
         const statement = {
             type:'Deposit',
             date: firebase.firestore.Timestamp.now(),
-            amount
+            amount: items[0].Value,
+            from:items[4].Value,
+            receiptNumber:items[1].Value
         }
         try {
             const data = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
             if (!data.data().balance) {
                 const newdata = {
                     ...data.data(),
-                    balance:amount,
+                    balance:items[0].Value,
                     statements:[statement]
                 }
                 await projectFireStore.collection('consoles').doc(currentUser.uid).set(newdata)
             }
             else {
-                const newBalance = (data.data().balance + amount)
+                const newBalance = (data.data().balance + items[0].Value)
                 const statements = data.data().statements
                 statements.push(statement)
                 const updatedObj = {

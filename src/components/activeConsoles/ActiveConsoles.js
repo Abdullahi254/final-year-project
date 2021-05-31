@@ -84,7 +84,7 @@ function ActiveConsoles() {
             }
             <Navigation onLogout={handleLogout} />
             {error && <Alert variant="danger" className="text-center">{error}</Alert>}
-            <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 {
                     consoles.map((obj, index) => {
                         return (

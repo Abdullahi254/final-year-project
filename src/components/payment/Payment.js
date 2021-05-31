@@ -68,7 +68,7 @@ function Scanner() {
                 "PartyA": phone,
                 "PartyB": shortCode,
                 "PhoneNumber": phone,
-                "CallBackURL": "https://3059ab347bbf.ngrok.io/lipanampesa",
+                "CallBackURL": "https://5a6adfa79bee.ngrok.io/lipanampesa",
                 "AccountReference": "Gamer001",
                 "TransactionDesc": "GAMING SERVICE"
             }

@@ -1,0 +1,11 @@
+@media(max-width:768px){
+    td{
+        font-size: 14px;
+    }
+}
+
+@media(max-width:575px){
+    td{
+        font-size: 12px;
+    }
+}
