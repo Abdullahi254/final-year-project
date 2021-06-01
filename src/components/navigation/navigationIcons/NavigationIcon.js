@@ -7,7 +7,7 @@ function NavigationIcon(props) {
     return (
         <ul className="Group">
             <NavigationItem path="/notification" tip="notification" ><Notification /></NavigationItem>
-            <NavigationItem path="/settings" tip="settings" ><Settings /></NavigationItem>
+            <NavigationItem path="/settings/user" tip="settings" ><Settings /></NavigationItem>
             <NavigationItem path="/logout" clicked={props.onLogout}>Log Out</NavigationItem>
         </ul>
     )

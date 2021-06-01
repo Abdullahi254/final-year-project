@@ -14,7 +14,7 @@ function SideDrawer(props) {
                     <NavigationItems />
                 </nav>
                 <ul>
-                    <NavigationItem path="/settings">Settings</NavigationItem>
+                    <NavigationItem path="/settings/user">Settings</NavigationItem>
                     <NavigationItem path="/logout" clicked={props.onLogout}>Log Out</NavigationItem>
                 </ul>
                 </div>

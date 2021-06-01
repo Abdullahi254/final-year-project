@@ -36,7 +36,8 @@ function Statements() {
                 </tr>
             </thead>
             {
-               statements.map((st,index)=><Statement type={st.type} date={st.date.toDate().toString()} amount={st.amount.toFixed(2)} from={st.from} receiptNumber={st.receiptNumber} key={index}/>)
+               statements ? statements.map((st,index)=><Statement type={st.type} date={st.date.toDate().toString()} amount={st.amount.toFixed(2)} from={st.from} receiptNumber={st.receiptNumber} key={index}/>):
+               <Alert variant="danger" className="text-center mt-4" style={{position:'absolute',width:'100%'}}>Error Fetching Statements</Alert>
             }
         </Table>
         </>

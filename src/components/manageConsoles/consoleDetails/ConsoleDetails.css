@@ -9,7 +9,12 @@
     color: #000;
     font-style: italic;
   }
-
+.Label{
+    font-size: large;
+    font-weight: 500;
+    font-style: oblique;
+    
+}
 .Iconi{
     background-color: #2d2d2d;
     cursor: pointer;

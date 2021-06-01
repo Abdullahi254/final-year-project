@@ -1,14 +1,12 @@
 import React,{useState,useEffect} from 'react'
-import Navigation from '../navigation/Navigation'
 import ConsoleDetails from './consoleDetails/ConsoleDetails'
 import ConsoleForm from '../consoleForm/ConsoleForm'
 import {useAuth} from '../../contexts/AuthContext'
 import {projectFireStore} from '../../firebase'
 import firebase from "firebase/app"
-import {Alert} from 'react-bootstrap'
-import {useHistory} from 'react-router-dom'
 import {Container} from 'react-bootstrap'
 import './ManageConsoles.css'
+
 function ManageConsoles() {
     const [dummyInfo,setDummyInfo] = useState([])
     const {currentUser} = useAuth()
@@ -25,24 +23,12 @@ function ManageConsoles() {
         }
         getData()
     },[update,currentUser])
-    const { logout } = useAuth()
-    const [error, setError] = useState('')
+    
     const [name,setName] = useState([])
     const [brand,setBrand] = useState([])
     const [generation,setGeneration] = useState([])
     const [price,setPrice]= useState([])
-    const history = useHistory()
-    async function handleLogout() {
-        try {
-            setError('')
-            await logout()
-            history.push('/login')
-        }
-        catch (err) {
-            setError('Failed to Logout')
-            console.log(err)
-        }
-    }
+
    async function updateConsole(e,index){
         e.preventDefault()
         /// updating the database
@@ -109,8 +95,6 @@ function ManageConsoles() {
     }
     return (
         <div className="ManageConsoles">
-            <Navigation onLogout={handleLogout} />
-            {error && <Alert variant="danger" className="text-center">{error}</Alert>}
             <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent:'center',}} className="mt-3">
                 <h4>LIST OF YOUR CONSOLES: </h4>
                 {

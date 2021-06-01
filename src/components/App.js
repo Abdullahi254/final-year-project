@@ -1,7 +1,7 @@
 import SignUp from './signUp/SignUp'
 import Login from './login/Login'
 import ActiveConsoles from './activeConsoles/ActiveConsoles'
-import ManageConsoles from './manageConsoles/ManageConsoles'
+import Settings from './settings/Settings'
 import IdleConsoles from './idleConsoles/IdleConsoles'
 import Payment from './payment/Payment'
 import Wallet from './wallet/Wallet'
@@ -15,7 +15,7 @@ function App() {
           <Switch>
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
-            <PrivateRoute path="/settings" component={ManageConsoles} />
+            <PrivateRoute path="/settings" component={Settings} />
             <PrivateRoute path="/wallet" component={Wallet} />
             <PrivateRoute path="/idleconsoles" component={IdleConsoles} />
             <PrivateRoute path="/payment/console/:id/:time/:price" component={Payment} />
