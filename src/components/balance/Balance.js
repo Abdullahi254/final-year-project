@@ -18,7 +18,7 @@ function Balance() {
                 setBalance(balnc)
             } catch (er) {
                 console.log(er)
-                setError('Error Fetching Balance')
+                setError('Balance Information Unavailable!')
             }
         }
         fetchBalance()
@@ -30,7 +30,7 @@ function Balance() {
                 <img src={logo} alt="logo" className="Blogo" />
                 <Card.Body className="text-center">
                     <Card.Title>Account Balance</Card.Title>
-                    <Card.Text className="Amount">KSH {balance}</Card.Text>
+                    <Card.Text className="Amount">KSH {balance||'0.00'}</Card.Text>
                     <Card.Subtitle className="mb-2 text-muted">Available</Card.Subtitle>
                 </Card.Body>
             </Card>

@@ -6,6 +6,7 @@ import {useAuth} from '../../contexts/AuthContext'
 import SettingNav from './settingNav/SettingNav'
 import { Switch, Route} from 'react-router-dom'
 import ManageConsoles from '../manageConsoles/ManageConsoles'
+import Profile from '../profile/Profile'
 function Settings() {
     const { logout } = useAuth()
     const [error, setError] = useState('')
@@ -31,7 +32,8 @@ function Settings() {
 
 
             <Switch>
-                <Route exact path="/settings/consoles" component={ManageConsoles}/>
+                <Route path="/settings/consoles" component={ManageConsoles}/>
+                <Route path="/settings/user" component={Profile}/>
             </Switch>
         </div>
     )

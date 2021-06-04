@@ -43,6 +43,7 @@ function IdleConsoles() {
             const consoleArray = data.data().myConsoles
             consoleArray[index].active = status
             await projectFireStore.collection('consoles').doc(currentUser.uid).set({
+                ...data.data(),
                 myConsoles:[...consoleArray]
             })
             setConsoles(consoleArray) 

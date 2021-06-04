@@ -7,7 +7,9 @@ function ConsoleDetails(props) {
         setInputState(!inputState)
     }
     return (
-        <Form onSubmit={props.updateConsole} className="m-4">
+        <>
+            {inputState?
+            <Form onSubmit={props.updateConsole} className="m-4">
             <Form.Row>
                 <Col className="text-center Label">
                     <Form.Label>Console Name</Form.Label>
@@ -45,7 +47,8 @@ function ConsoleDetails(props) {
                 </Col>
 
             </Form.Row>
-        </Form>
+        </Form>:null}
+        </>
     )
 }
 

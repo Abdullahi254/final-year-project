@@ -15,7 +15,6 @@ function Socket(props) {
         // get feedback from socket io server
         socket.on('metaData', (data) => {
             console.log(data)
-            props.loading(false)
             if (data.ResultCode === 0) {
                 setShow(true)
                 setStatus('success')
@@ -66,11 +65,15 @@ function Socket(props) {
             console.log(er)
         }
     }
-
+// closes alert on clicking close button
+    function closeMessageHandler(){
+        setShow(false)
+        props.loading(false)
+    }
     return (
         <>
-            {show && status==='success'?<Alert variant='success' className="text-center" dismissible onClose={()=>setShow(false)}>{message}</Alert>:null}
-            {show && status==='failed'?<Alert variant='danger' className="text-center" dismissible onClose={()=>setShow(false)}>{message}</Alert>:null}
+            {show && status==='success'?<Alert variant='success' className="text-center" dismissible onClose={closeMessageHandler}>{message}</Alert>:null}
+            {show && status==='failed'?<Alert variant='danger' className="text-center" dismissible onClose={closeMessageHandler}>{message}</Alert>:null}
         </>
     )
 }

@@ -37,13 +37,16 @@
 @media(max-width:768px){
     .InfoInput{
         margin: 8px 3px;
-        max-width: 7.7rem;
         font-size: 12px;
     }
     .Iconi{
         margin-top: 8px;
-        width: 60px;
+        width: 3rem;
         font-size: 12px;
         border-radius: 5px;
+    }
+    .Label{
+        font-size: 12px;
+        margin: 0;
     }
 }

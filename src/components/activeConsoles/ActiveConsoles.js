@@ -19,6 +19,7 @@ function ActiveConsoles() {
     const [qrConsole,setQrConsole] = useState('')
     const history = useHistory()
     useEffect(() => {  
+        // fetching consoles data from firebase
         async function getConsoles() {
             try { 
                 const data = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
@@ -30,6 +31,7 @@ function ActiveConsoles() {
         }
         getConsoles()
     }, [currentUser])
+    // handles logout logic on logout button click
     async function handleLogout() {
         try {
             setError('')
@@ -41,7 +43,7 @@ function ActiveConsoles() {
             console.log(err)
         }
     }
-
+    //change console state from active to idle and viceversa
     async function statusHandler(status,index){
         try{
    
@@ -49,6 +51,7 @@ function ActiveConsoles() {
             const consoleArray = data.data().myConsoles
             consoleArray[index].active = status
             await projectFireStore.collection('consoles').doc(currentUser.uid).set({
+                ...data.data(),
                 myConsoles:[...consoleArray]
             })
             setConsoles(consoleArray) 
@@ -56,7 +59,7 @@ function ActiveConsoles() {
             console.log('did not set active status',er)
         }
     }
-
+// the function below takes time information from ConsoleInfo, which is later fed into the QrComponent to produce a qrcode
     function qrCodeHandler(h,m,s,index){
         showQrComponent(true)
         setStartHour(h)
@@ -64,6 +67,7 @@ function ActiveConsoles() {
         setStartSecond(s)
         setQrConsole(consoles[index])
     }
+//this function also take time info and sends it to the payment page via url parameter together with price/min charges
     function paymmentHandler(h,m,index){
         const day = new Date()
         const hoursPlayed = day.getHours() - h
@@ -72,6 +76,7 @@ function ActiveConsoles() {
         console.log('total minutes played '+totalMinutesPlayed)
         history.push(`/payment/console/${index}/${totalMinutesPlayed}/${consoles[index].price}`)
     }
+//handles unmounting of qrcomponent on click of close button
     function closeQrComponentHandler(){
         showQrComponent(false)
     }

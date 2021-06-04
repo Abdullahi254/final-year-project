@@ -18,7 +18,7 @@ function App() {
             <PrivateRoute path="/settings" component={Settings} />
             <PrivateRoute path="/wallet" component={Wallet} />
             <PrivateRoute path="/idleconsoles" component={IdleConsoles} />
-            <PrivateRoute path="/payment/console/:id/:time/:price" component={Payment} />
+            <Route path="/payment/console/:id/:time/:price" component={Payment} />
             <PrivateRoute path="/" component={ActiveConsoles} />
           </Switch>
         </AuthProvider>

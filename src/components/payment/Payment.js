@@ -6,7 +6,7 @@ import { Form, Button, Card, Alert } from 'react-bootstrap'
 import axios from 'axios'
 
 
-function Scanner() {
+function Payment() {
     const { time, price } = useParams()
     const [amount] = useState(price)
     const phoneRef = useRef()
@@ -68,7 +68,7 @@ function Scanner() {
                 "PartyA": phone,
                 "PartyB": shortCode,
                 "PhoneNumber": phone,
-                "CallBackURL": "https://5a6adfa79bee.ngrok.io/lipanampesa",
+                "CallBackURL": "https://239925b03d39.ngrok.io/lipanampesa",
                 "AccountReference": "Gamer001",
                 "TransactionDesc": "GAMING SERVICE"
             }
@@ -106,4 +106,4 @@ function Scanner() {
     )
 }
 
-export default Scanner
+export default Payment
