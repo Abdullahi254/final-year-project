@@ -12,7 +12,7 @@ function QrComponent(props) {
     content: () => contentRef.current
   })
   useEffect(() => {
-    qrcode.toDataURL([`${props.hour}:${props.minutes}:${props.seconds}`, props.price],
+    qrcode.toDataURL(`http://192.168.1.9:3000/payment/console/${props.id}/${props.hour}.${props.minutes}/${props.price}`,
       {
         errorCorrectionLevel: 'H',
         type: 'image/jpeg',
@@ -20,13 +20,12 @@ function QrComponent(props) {
       }
     )
       .then(url => {
-        console.log(url)
         setUrl(url)
       })
       .catch(er => {
         console.log(er)
       })
-  }, [props.hour, props.minutes, props.seconds, props.price])
+  }, [props.hour, props.minutes, props.price, props.id])
   return (
     <>
       <BackDrop show={props.show} clicked={props.close} />

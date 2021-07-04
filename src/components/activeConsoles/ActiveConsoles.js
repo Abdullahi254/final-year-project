@@ -65,32 +65,32 @@ function ActiveConsoles() {
         setStartHour(h)
         setStartMinute(m)
         setStartSecond(s)
-        setQrConsole(consoles[index])
+        setQrConsole([consoles[index],index])
     }
 //this function also take time info and sends it to the payment page via url parameter together with price/min charges
     function paymmentHandler(h,m,index){
-        const day = new Date()
-        const hoursPlayed = day.getHours() - h
-        const minutesPlayed = day.getMinutes() - m
-        const totalMinutesPlayed = (hoursPlayed * 60) + minutesPlayed
-        console.log('total minutes played '+totalMinutesPlayed)
-        history.push(`/payment/console/${index}/${totalMinutesPlayed}/${consoles[index].price}`)
+        const win = window.open(`/payment/console/${index}/${h}.${m}/${consoles[index].price}`, "_blank");
+        win.focus();
     }
 //handles unmounting of qrcomponent on click of close button
     function closeQrComponentHandler(){
         showQrComponent(false)
     }
-
+    function checkForConsoles(){
+        const list = consoles.filter(obj=>obj.active)
+        return list.length    
+    }
     return (
         <div className="ActiveConsoles">
             {
-                qrComponent ?<QrComponent show={qrComponent} close={closeQrComponentHandler} name={qrConsole.name} hour={startHour} 
-                minutes={startMinute} seconds={startSecond} price={qrConsole.price}/>:null
+                qrComponent ?<QrComponent show={qrComponent} close={closeQrComponentHandler} name={qrConsole[0].name} hour={startHour} 
+                minutes={startMinute} seconds={startSecond} price={qrConsole[0].price} id={qrConsole[1]}/>:null
             }
             <Navigation onLogout={handleLogout} />
             {error && <Alert variant="danger" className="text-center">{error}</Alert>}
             <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 {
+                    checkForConsoles()<1?<i className="text-center p-5">Add Active Consoles Here!</i>:
                     consoles.map((obj, index) => {
                         return (
                             obj.active ?<ConsoleInfo name={obj.name} key={index} showIcons setActive={(status)=>statusHandler(status,index)}

@@ -15,21 +15,37 @@
     font-style: oblique;
     
 }
+.Icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .Iconi{
     background-color: #2d2d2d;
     cursor: pointer;
     color: #fff;
-    border-radius: 10px;
     padding: 5px;
-    width: 100px;
-    margin-top: 10px;
+    margin-top: 6px;
+    border-radius: 5px;
  }
 
  .Iconi:hover{
     background-color: #ccc;
     color: black;
  }
- 
+ .del:hover{
+     background-color: #d11a2a;
+     color: white
+ }
+ .edit:hover{
+    background-color: #179650;
+    color: white
+ }
+ .Iconi:disabled{
+    background-color: #ccc;
+    cursor:not-allowed ;
+    color: white;
+ }
  .InfoInput:disabled{
     background-color: #dddd;
     border: .5px;
@@ -41,9 +57,7 @@
     }
     .Iconi{
         margin-top: 8px;
-        width: 3rem;
         font-size: 12px;
-        border-radius: 5px;
     }
     .Label{
         font-size: 12px;

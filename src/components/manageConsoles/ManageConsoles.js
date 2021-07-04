@@ -4,19 +4,22 @@ import ConsoleForm from '../consoleForm/ConsoleForm'
 import {useAuth} from '../../contexts/AuthContext'
 import {projectFireStore} from '../../firebase'
 import firebase from "firebase/app"
-import {Container} from 'react-bootstrap'
+import {Container, Alert} from 'react-bootstrap'
 import './ManageConsoles.css'
 
 function ManageConsoles() {
-    const [dummyInfo,setDummyInfo] = useState([])
+    const [consoles,setConsoles] = useState([])
     const {currentUser} = useAuth()
     const [update,setUpdate] = useState(false)
+    const [successMessage,setSuccesstMessage] = useState('')
+    const [error,setErrorMessage] = useState('')
+    const [show, setShow] = useState(false)
     useEffect(()=>{
         //fetch name, brand and generation from database
         async function getData(){
             try{
                 const doc = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
-                setDummyInfo(doc.data().myConsoles)
+                setConsoles(doc.data().myConsoles)
             }catch(er){
                 console.log(er)
             }
@@ -24,55 +27,26 @@ function ManageConsoles() {
         getData()
     },[update,currentUser])
     
-    const [name,setName] = useState([])
-    const [brand,setBrand] = useState([])
-    const [generation,setGeneration] = useState([])
-    const [price,setPrice]= useState([])
-
-   async function updateConsole(e,index){
+   async function updateConsole(e,data,index){
         e.preventDefault()
-        /// updating the database
+        /// updating the database with new console data
         
-        setDummyInfo(prevInfo=>{
-            prevInfo.splice(index,1,{
-                name:name[index],
-                brand:brand[index],
-                generation:generation[index],
-                price:price[index]
-            })
+        setConsoles(prevInfo=>{
+            prevInfo.splice(index,1,{...data})
             return [...prevInfo]
         })
         try{
             const doc = projectFireStore.collection('consoles').doc(currentUser.uid)
-            await doc.update({myConsoles:[...dummyInfo]})
+            await doc.update({myConsoles:[...consoles]})
+            setSuccesstMessage('Successfuly Updated Console!')
+            setShow(true)
         }catch(error){
+            setErrorMessage("Error Saving Console!")
+            setShow(true)
             console.log(error)
         }
     }
-    function updateName (e,index){
-        setName(prev=>{
-            prev.splice(index,1,e.target.value)
-            return [...prev]
-        })     
-    }
-    function updateBrand (e,index){
-        setBrand(prev=>{
-            prev.splice(index,1,e.target.value)
-            return [...prev]
-        })
-    }
-    function updateGeneration (e,index){
-        setGeneration(prev=>{
-            prev.splice(index,1,e.target.value)
-            return [...prev]
-        })
-    }
-    function updatePrice(e,index){
-        setPrice(prev=>{
-            prev.splice(index,1,e.target.value)
-            return[...prev]
-        })
-    }
+  
     function newConsoleHandler(){
         setTimeout(()=>{
             setUpdate(!update)
@@ -81,26 +55,36 @@ function ManageConsoles() {
     async function deleteConsoleHandler(e,index){
         //delete element from array in firestore
         e.preventDefault();
-        const consoleObj = dummyInfo[index]
-        console.log(dummyInfo[index])  
+        const consoleObj = consoles[index]
+        console.log(consoles[index])  
         try{
             const doc = projectFireStore.collection('consoles').doc(currentUser.uid)
             await doc.update({myConsoles:firebase.firestore.FieldValue.arrayRemove(consoleObj)})
             const data = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
-            setDummyInfo(data.data().myConsoles)
+            setConsoles(data.data().myConsoles)
+            setSuccesstMessage('Successfuly deleted Console!')
+            setShow(true)
             console.log('deleted')
         }catch(error){
             console.log(error)
+            setErrorMessage("Error Deleting Console!")
+            setShow(true)
         }
+    }
+    // close the alert message div
+    function closeMessageHandler(){
+        setShow(false)
     }
     return (
         <div className="ManageConsoles">
             <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent:'center',}} className="mt-3">
+                {show && successMessage && <Alert variant="success" className="text-center" dismissible onClose={closeMessageHandler}>{successMessage}</Alert>}
+                {show && error && <Alert variant="danger" className="text-center" dismissible onClose={closeMessageHandler}> {error}</Alert>}
                 <h4>LIST OF YOUR CONSOLES: </h4>
-                {
-                    dummyInfo.map((val,index)=>{
+                {   consoles.length < 1 ? <i className="text-center p-5">No Consoles Available!</i>:
+                    consoles.map((val,index)=>{
                         return (
-                            <ConsoleDetails name={val.name} brand={val.brand} generation={val.generation} price={val.price} updateConsole={(e)=>updateConsole(e,index)} getName={(e)=>updateName(e,index)} getBrand={(e)=>updateBrand(e,index)} getGeneration={(e)=>updateGeneration(e,index)} getPrice={(e)=>updatePrice(e,index)} key={index} delete={(e)=>deleteConsoleHandler(e,index)}/>
+                            <ConsoleDetails name={val.name} brand={val.brand} generation={val.generation} price={val.price} updateConsole={(e,data)=>updateConsole(e,data,index)}  key={index} delete={(e)=>deleteConsoleHandler(e,index)}/>
                         )
                     })
                 } 

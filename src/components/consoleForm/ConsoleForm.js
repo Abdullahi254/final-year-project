@@ -52,8 +52,8 @@ function ConsoleForm(props) {
             name: nameRef.current.value,
             brand: brandRef.current.value,
             generation: generationRef.current.value,
-            price:priceRef.current.value,
-            active:false
+            price: priceRef.current.value,
+            active: false
         }
         try {
             const data = await projectFireStore.collection('consoles').doc(currentUser.uid).get()
