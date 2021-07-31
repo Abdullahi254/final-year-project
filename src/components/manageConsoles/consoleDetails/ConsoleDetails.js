@@ -1,5 +1,5 @@
 import React, {useRef, useState } from 'react'
-import { Form, Col } from 'react-bootstrap'
+import { Form, Col, Alert } from 'react-bootstrap'
 import './ConsoleDetails.css'
 function ConsoleDetails(props) {
     // inputs references
@@ -10,6 +10,9 @@ function ConsoleDetails(props) {
     // input state changes when edit or save button is clicked
     const [inputState, setInputState] = useState(true)
     const [brand, setBrand] = useState(props.brand)
+    const [erroMessage,setErrorMessage] = useState('')
+    const [show,setShow] = useState(false)
+    const [isInvalid,setIsInvalid] = useState([true,true])
     // array of game consoles generations and brand
     const brandList = ["PlayStation", "X-Box", "Arcade", "Computer(PC)"]
     const brandOptions = brandList.map((brand, index) => <option className="Options" key={index}>{brand}</option>)
@@ -54,21 +57,61 @@ function ConsoleDetails(props) {
     // handles on submit form, sends data to ManageConsole to be saved to database
     function updateConsole(e){
         e.preventDefault()
+        setErrorMessage('')
         setInputState(false)
-        console.log(nameRef.current.value)
-        const consoleData = {
-            name: nameRef.current.value,
-            brand: brandRef.current.value,
-            generation: generationRef.current.value,
-            price:priceRef.current.value,
-            active:false
+        
+        if(nameRef.current.value && priceRef.current.value){
+            const consoleData = {
+                name: nameRef.current.value,
+                brand: brandRef.current.value,
+                generation: generationRef.current.value,
+                price:priceRef.current.value,
+                active:false
+            }
+            console.log(consoleData)
+            props.updateConsole(e,consoleData)
+            setInputState(true)
         }
-        console.log(consoleData)
-        props.updateConsole(e,consoleData)
-        setInputState(true)
+        else{
+            setErrorMessage("Inputs should not be blank!")
+            setShow(true)
+        }
+        
+    }
+    // close the alert message div
+    function closeMessageHandler(){
+        setShow(false)
+    }
+    function checkValidity(){
+        if(nameRef.current.value.length>=4){
+            setIsInvalid(prevList=>{
+                prevList.splice(0,1,false)
+                return [...prevList]
+            })
+        }
+        else{
+            setIsInvalid(prevList=>{
+                prevList.splice(0,1,true)
+                return [...prevList]
+            })
+        }
+        if(priceRef.current.value.length>0){
+            setIsInvalid(prevList=>{
+                prevList.splice(1,1,false)
+                return [...prevList]
+            })
+        }
+        else{
+            setIsInvalid(prevList=>{
+                prevList.splice(1,1,true)
+                return [...prevList]
+            })
+        }
+
     }
     return (
         <>
+            {show && erroMessage && <Alert variant="danger" dismissible onClose={closeMessageHandler}>{erroMessage}</Alert>}
             <Form onSubmit={updateConsole} className="m-4">
                 <Form.Row>
                     <Col className="text-center Label">
@@ -89,7 +132,7 @@ function ConsoleDetails(props) {
                     <Col>
                         {
                             inputState ? <Form.Control className="InfoInput" placeholder={props.name} disabled={inputState} /> :
-                                <Form.Control className="InfoInput" placeholder={props.name} ref={nameRef}/>
+                                <Form.Control className="InfoInput" placeholder={props.name} ref={nameRef} isInvalid={isInvalid[0]} onChange={checkValidity}/>
                         }
 
                     </Col>
@@ -112,7 +155,7 @@ function ConsoleDetails(props) {
                     <Col>
                         {
                             inputState ? <Form.Control className="InfoInput" placeholder={props.price} disabled={inputState} onChange={props.getPrice} /> :
-                                <Form.Control className="InfoInput" placeholder={props.price} ref={priceRef} />
+                                <Form.Control className="InfoInput" placeholder={props.price} ref={priceRef} isInvalid={isInvalid[1]} onChange={checkValidity} type="number" min="1"/>
                         }
 
                     </Col>

@@ -50,10 +50,10 @@
 
 @media print {
     .Message{
-        font-family:georgia, times, serif;
-        font-size: 45px;
+        font-size: 5mm;
+        font-weight: bold;
     }
     .QRImg{
-        width: 500px;
+        width: 600px;
     }
  }

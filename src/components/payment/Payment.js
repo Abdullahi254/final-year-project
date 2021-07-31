@@ -82,8 +82,8 @@ function Payment() {
                     "PartyA": phone,
                     "PartyB": shortCode,
                     "PhoneNumber": phone,
-                    "CallBackURL": "https://ca3cb5530d89.ngrok.io/lipanampesa",
-                    "AccountReference": "Gamer001",
+                    "CallBackURL": "https://3b9dfc7608e0.ngrok.io/lipanamobile",
+                    "AccountReference": "Gaming Lounge Payment System",
                     "TransactionDesc": "GAMING SERVICE"
                 }
             }).then(res => {

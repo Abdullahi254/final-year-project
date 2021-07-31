@@ -9,12 +9,14 @@ function ConsoleInfo(props) {
     const [second, setSecond] = useState(0)
     const [minute, setMinute] = useState(0)
     const [start, setStart] = useState(false)
+    const [isDisabled, setIsDisabled] = useState(true)
     useEffect(() => {
         if (start) {
             const id = setInterval(() => {
                 if (second >= 59) {
                     setMinute(minute => minute += 1)
                     setSecond(second => second -= 59)
+                    setIsDisabled(false)
                 }
                 else {
                     setSecond(second => second += 1)
@@ -80,8 +82,7 @@ function ConsoleInfo(props) {
             <input className="InfoInput Time" disabled value={`${0}:${minute}:${second}`} />
             <div className="Icons">
                 {start ? <span className="Icon"><PauseCircleFilled onClick={stopClockHandler}  style={{display:props.showIcons?'inline-block':'none'}}/></span>: <span className="Icon"><PlayCircleFilledWhite onClick={setStartTimeHandler}  style={{display:props.showIcons?'inline-block':'none'}}/></span>}
-                <button className="Pay" style={{display:props.showIcons?'inline-block':'none'}} onClick={paymentHandler} ><Payment/></button>
-                {/* disabled={(new Date().getMinutes()-startMinute)>5||(new Date().getHours()-startHour)>1?false:true} */}
+                <button className="Pay" style={{display:props.showIcons?'inline-block':'none'}} onClick={paymentHandler} disabled={isDisabled}><Payment/></button>
                 <span className="Icon" style={{display:props.showIcons?'inline-block':'none'}} onClick={ejectHandler}><Eject /></span>
                 <span className="Icon" onClick={setActiveHandler} style={{display:props.addIcon?'inline-block':'none'}}><AddCircleOutline /></span>
             </div>
